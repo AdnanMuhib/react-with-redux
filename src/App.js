@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "./actions/UserActions";
+import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
+  const isLoading = useSelector((state) => state.users.loading);
+  useEffect(() => {
+    dispatch(getUsers());
+    // eslint-disable-next-line
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App1">
+      <header className=""></header>
+      {!isLoading ? (
+        users.map((user) => <h1 key={user.id}>{user.name}</h1>)
+      ) : (
+        <h1>Loading ...</h1>
+      )}
     </div>
   );
 }
