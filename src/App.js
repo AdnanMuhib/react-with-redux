@@ -8,7 +8,7 @@ function App() {
   const users = useSelector((state) => state.users.users);
   const isLoading = useSelector((state) => state.users.loading);
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUsers({ page: 2 }));
     // eslint-disable-next-line
   }, []);
 

@@ -18,16 +18,20 @@ const onGetUsersFailed = (error) => ({
   error,
 });
 
-export const getUsers = () => (dispatch) => {
+export const getUsers = (query_params = {}) => (dispatch) => {
   dispatch(onGetUsersStarted());
   const instance = axios.create({
     baseURL: "https://reqres.in/api",
   });
 
   instance
-    .get("/users", {
-      timeout: 5000,
-    })
+    .get(
+      "/users",
+      { params: query_params },
+      {
+        timeout: 5000,
+      }
+    )
     .then((response) => {
       console.log(response);
       dispatch(onGetUsersSucceeded(response));
