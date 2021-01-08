@@ -6,6 +6,7 @@ import {
 
 const defaultState = {
   loading: false,
+  error: "",
   users: [],
 };
 
@@ -13,11 +14,11 @@ const users = (state = defaultState, action) => {
   let newState;
 
   switch (action.type) {
-      case GET_USERS_STARTED: {
-          console.log("Users Started, Reducer");
+    case GET_USERS_STARTED: {
       newState = {
         ...state,
         loading: true,
+        error: "",
       };
       return newState;
     }
@@ -25,13 +26,14 @@ const users = (state = defaultState, action) => {
       newState = {
         ...state,
         loading: false,
-        users: action.response.data,
+        users: action.response.data.data,
       };
       return newState;
     case GET_USERS_FAILED:
       newState = {
         ...state,
         loading: false,
+        error: action.error.message,
       };
       return newState;
     default:
