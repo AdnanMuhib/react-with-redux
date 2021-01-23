@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "./actions/UserActions";
 import "./App.css";
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App1">
-      <header className=""></header>
+      <header className="">Initialization Completed</header>
       {!isLoading ? (
         users.map((user) => (
           <div key={user.id}>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import Instance from "../utils/AxiosUtil";
 
 export const GET_USERS_STARTED = "GET_USERS_STARTED";
 export const GET_USERS_SUCCEEDED = "GET_USERS_SUCCCEEDED";
@@ -20,11 +20,7 @@ const onGetUsersFailed = (error) => ({
 
 export const getUsers = (query_params = {}) => (dispatch) => {
   dispatch(onGetUsersStarted());
-  const instance = axios.create({
-    baseURL: "https://reqres.in/api",
-  });
-
-  instance
+  return Instance.axiosInstance()
     .get(
       "/users",
       { params: query_params },
